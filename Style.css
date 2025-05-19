@@ -24,3 +24,11 @@
   nav ul li a:hover {
     text-decoration: underline;
   }
+
+nav ul li a.disabled {
+  color: #aaa; /* iets lichter grijs dan white */
+  pointer-events: none; /* maakt klikken onmogelijk */
+  cursor: default; /* toont een normale cursor */
+  text-decoration: none;
+  font-weight: bold;
+}
