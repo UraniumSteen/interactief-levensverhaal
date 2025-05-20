@@ -4,6 +4,7 @@ function checkAnswer() {
   const selected = form.answer.value;
   const homeLink = document.getElementById('homeLink');
 
+
   if (!selected) {
     result.textContent = "Kies eerst een antwoord!";
     result.style.color = "red";
@@ -14,10 +15,9 @@ function checkAnswer() {
     result.textContent = "Goed zo! Amsterdam is inderdaad de hoofdstad.";
     result.style.color = "green";
 
-    homeLink.innerHTML = '🔓 <a href="home.html">Home</a>';
+    homeLink.innerHTML = '<a href="home.html" id="innerHtml">Home</a>';
     homeLink.style.color = "green";
     homeLink.style.cursor = "pointer";
-    document.querySelector('.disabled').classList.remove('disabled');
 
     // Antwoord opslaan in localStorage
     localStorage.setItem('quizAnswer', selected);
@@ -43,10 +43,13 @@ window.onload = function() {
       result.textContent = "Goed zo! Amsterdam is inderdaad de hoofdstad.";
       result.style.color = "green";
 
-      homeLink.innerHTML = '🔓 <a href="home.html">Home</a>';
+      homeLink.innerHTML = '<a href="home.html" id="homeLink">Home</a>';
       homeLink.style.color = "green";
       homeLink.style.cursor = "pointer";
-      document.querySelector('.disabled').classList.remove('disabled');
     }
   }
 };
+const bom = document.getElementById('bom');
+bom.addEventListener("click", function a(){
+  localStorage.clear()
+})
