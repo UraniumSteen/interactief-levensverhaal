@@ -1,8 +1,11 @@
+const Bombaclad = document.getElementById('Bombaclad');
+const homeLink = document.getElementById('homeLink');
+let right = false
 function checkAnswer() {
   const form = document.getElementById('quizForm');
+  if (!form) return; // Geen quiz op deze pagina, functie stopt hier
   const result = document.getElementById('result');
   const selected = form.answer.value;
-  const homeLink = document.getElementById('homeLink');
 
 
   if (!selected) {
@@ -14,10 +17,10 @@ function checkAnswer() {
   if (selected === "Amsterdam") {
     result.textContent = "Goed zo! Amsterdam is inderdaad de hoofdstad.";
     result.style.color = "green";
+    right = true;          // Zet right meteen op true
+    updateBombaclad();     // Update direct de link
 
-    homeLink.innerHTML = '<a href="home.html" id="innerHtml">Home</a>';
-    homeLink.style.color = "green";
-    homeLink.style.cursor = "pointer";
+
 
     // Antwoord opslaan in localStorage
     localStorage.setItem('quizAnswer', selected);
@@ -27,29 +30,47 @@ function checkAnswer() {
     result.style.color = "red";
   }
 }
+function updateBombaclad() {
+  if (right) {
+    Bombaclad.innerHTML = '<a href="a.html" id="Bomboclad">deel 1</a>';
+    Bombaclad.style.color = "green";
+    Bombaclad.style.cursor = "pointer";
+  } else {
+    Bombaclad.innerHTML = '';
+    Bombaclad.style.color = '';
+    Bombaclad.style.cursor = '';
+  }
+}
 
 // Bij het laden van de pagina, ingevulde waarde terugzetten:
 window.onload = function() {
   const savedAnswer = localStorage.getItem('quizAnswer');
   if (savedAnswer) {
     const form = document.getElementById('quizForm');
-    form.answer.value = savedAnswer;
+    if (form && form.answer) {
+      form.answer.value = savedAnswer;
+    }
 
-    // Optioneel: resultaat en home link meteen goed zetten
     if (savedAnswer === "Amsterdam") {
       const result = document.getElementById('result');
-      const homeLink = document.getElementById('homeLink');
-
-      result.textContent = "Goed zo! Amsterdam is inderdaad de hoofdstad.";
-      result.style.color = "green";
-
-      homeLink.innerHTML = '<a href="home.html" id="homeLink">Home</a>';
-      homeLink.style.color = "green";
-      homeLink.style.cursor = "pointer";
+      if (result) {
+        result.textContent = "Goed zo! Amsterdam is inderdaad de hoofdstad.";
+        result.style.color = "green";
+      }
+      right = true;
+      updateBombaclad();
     }
   }
 };
 const bom = document.getElementById('bom');
+if (bom) {
+  bom.addEventListener("click", function() {
+    localStorage.clear();
+    right = false;
+    updateBombaclad();
+})};
+
 bom.addEventListener("click", function a(){
   localStorage.clear()
+  right = false;
 })

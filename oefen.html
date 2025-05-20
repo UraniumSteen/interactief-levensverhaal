@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>levensverhaal</title>
+    <link rel="stylesheet" href="Style.css" />
+</head>
+<body>
+    <nav>
+  <ul>
+    <li><a href="index.html">Startpagina</a></li>
+    <li><a href="oefen.html">Oefenen</a></li>
+    <li id="Bombaclad"></li>
+  </ul>
+</nav>
+
+
+
+<div id="quiz">
+  <h2>Wat is de hoofdstad van Nederland?</h2>
+
+  <form id="quizForm">
+    <label>
+      <input type="radio" name="answer" value="Amsterdam" /> Amsterdam
+    </label><br />
+    <label>
+      <input type="radio" name="answer" value="Rotterdam" /> Rotterdam
+    </label><br />
+    <label>
+      <input type="radio" name="answer" value="Utrecht" /> Utrecht
+    </label><br /><br />
+    <button type="button" onclick="checkAnswer()">Check Antwoord</button>
+  </form>
+
+  <p id="result"></p>
+  <button id="bom">Wis gegevens</button>
+</div>
+
+<script src="js.js"></script>
+</body>
+</html>
