@@ -2,16 +2,18 @@ const Bombaclad = document.getElementById('Bombaclad');
 const homeLink = document.getElementById('homeLink');
 const elementLi = document.getElementById('element');
 const langerhalsLi = document.getElementById('Langerhals');
+const snelliusLi = document.getElementById('Snellius');
 
 let right = false;
 let right4 = false;
 let answeredCorrectly = false;
 let correctLangerhals = false;
+let correctSnellius = false;  // nieuwe variabele voor Snellius
 
 function checkAnswer() {
   const form = document.getElementById('quizForm');
   if (!form) return;
-  const result = document.getElementById('result');
+  const result = document.getElementById('resultOefenen');
   const selected = form.answer.value;
 
   if (!selected) {
@@ -46,7 +48,7 @@ function updateBombaclad() {
 
 function checkAnswerElementen() {
   const input = document.getElementById('answerInput');
-  const result = document.getElementById('result');
+  const result = document.getElementById('resultDeel1');
   const answer = input.value.trim();
   const correctAnswer = "9193128131"; // Correcte code voor PaNpMgTlGa
 
@@ -168,26 +170,74 @@ function updateLangerhalsLink() {
   }
 }
 
+// *** NIEUWE FUNCTIES VOOR SNELLIUS VRAAG ***
 
-  function clearResult(id) {
+function checkSnelliusAnswer() {
+  const form = document.getElementById('quizFormSnellius');
+  if (!form) return;
+
+  const result = document.getElementById('resultSnellius');
+  const selected = form.answer.value;
+
+  if (!selected) {
+    result.textContent = "Kies eerst een antwoord!";
+    result.style.color = "red";
+    return;
+  }
+
+  if (selected.toLowerCase() === "optica") {
+    result.textContent = "Correct! De wet van Snellius behoort tot de optica.";
+    result.style.color = "green";
+    correctSnellius = true;
+    updateSnelliusLink();
+    localStorage.setItem('quizAnswerSnellius', selected);
+  } else {
+    result.textContent = "Helaas, dat is niet juist. Probeer het nog eens.";
+    result.style.color = "red";
+    correctSnellius = false;
+    updateSnelliusLink();
+    localStorage.removeItem('quizAnswerSnellius');
+  }
+}
+
+function updateSnelliusLink() {
+  if (!snelliusLi) return;
+
+  if (correctSnellius) {
+    snelliusLi.innerHTML = '<a href="deel4.html">deel 4</a>';
+    snelliusLi.style.color = "green";
+    snelliusLi.style.cursor = "pointer";
+  } else {
+    snelliusLi.innerHTML = "";
+    snelliusLi.style.color = "";
+    snelliusLi.style.cursor = "";
+  }
+}
+
+// Functie om result velden leeg te maken
+function clearResult(id) {
   const el = document.getElementById(id);
   if (el) {
     el.textContent = "";
     el.style.color = "";
   }
-  }
+}
 
 window.onload = function() {
   // Eerst alle result elementen leegmaken (als ze bestaan)
   clearResult('result');
   clearResult('result4');
   clearResult('resultLangerhans');
+  clearResult('resultOefenen');
+  clearResult('resultDeel1');
+  clearResult('resultSnellius');  // nieuwe clear voor Snellius
+
   // Amsterdam quiz
   const savedAnswer = localStorage.getItem('quizAnswer');
   if (savedAnswer === "Amsterdam") {
     right = true;
     updateBombaclad();
-    const result = document.getElementById('result');
+    const result = document.getElementById('resultOefenen');
     if (result) {
       result.textContent = "Goed zo! Amsterdam is inderdaad de hoofdstad.";
       result.style.color = "green";
@@ -201,7 +251,7 @@ window.onload = function() {
     updateNavigation();
     const input = document.getElementById('answerInput');
     if (input) input.value = savedAnswer1;
-    const result = document.getElementById('result');
+    const result = document.getElementById('resultDeel1');
     if (result) {
       result.textContent = "Goed zo! Deel 2 is nu beschikbaar in de navigatie.";
       result.style.color = "green";
@@ -231,6 +281,22 @@ window.onload = function() {
       resultLangerhals.style.color = "green";
     }
   }
+
+  // Snellius quiz (nieuw)
+  const savedAnswerSnellius = localStorage.getItem('quizAnswerSnellius');
+  if (savedAnswerSnellius && savedAnswerSnellius.toLowerCase() === "optica") {
+    correctSnellius = true;
+    updateSnelliusLink();
+    const resultSnellius = document.getElementById('resultSnellius');
+    if (resultSnellius) {
+      resultSnellius.textContent = "Correct! De wet van Snellius behoort tot de optica.";
+      resultSnellius.style.color = "green";
+    }
+    const form = document.getElementById('quizFormSnellius');
+    if (form) {
+      form.answer.value = savedAnswerSnellius;
+    }
+  }
 };
 
 const bom = document.getElementById('bom');
@@ -241,9 +307,12 @@ if (bom) {
     right4 = false;
     answeredCorrectly = false;
     correctLangerhals = false;
+    correctSnellius = false;  // reset Snellius status
     updateBombaclad();
     updateCalculus();
     updateNavigation();
     updateLangerhalsLink();
+    updateSnelliusLink();
+    clearResult('resultSnellius');
   });
 }

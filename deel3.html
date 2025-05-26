@@ -13,6 +13,7 @@
     <li><a href="deel1.html">deel 1</a></li>
     <li><a href="deel2.html">deel 2</a></li>
     <li><a href="deel3.html">deel 3</a></li>
+    <li id="Snellius"></li>
     <li id="Calculus"></li>
   </ul>
   </nav>
@@ -53,6 +54,23 @@
     Ik weet wel dat wetenschappelijk materialisme niet volledig ondersteunt is, dus zal ik eerder het standpunt van een 
     wetenschappelijke pragmaat innemen bij een debat, gesprek, ... omdat ik deze wel goed kan verdedigen. Dit was dan mijn godsdienstdeel.
   </p>
+  <form id="quizFormSnellius">
+  <p>Uit welk deel van de fysica behoort de wet van Snellius?</p>
+  <label><input type="radio" name="answer" value="Mechanica"> Mechanica</label><br>
+  <label><input type="radio" name="answer" value="Thermodynamica"> Thermodynamica</label><br>
+  <label><input type="radio" name="answer" value="Elektromagnetisme"> Elektromagnetisme</label><br>
+  <label><input type="radio" name="answer" value="Optica"> Optica</label><br>
+  <label><input type="radio" name="answer" value="Kwantummechanica"> Kwantummechanica</label><br>
+
+  <button type="button" onclick="checkSnelliusAnswer()">Check antwoord</button>
+</form>
+
+<p id="resultSnellius"></p>
+
+<ul>
+  <li id="Snellius"></li>
+</ul>
+
   <script src="js.js"></script>
 </body>
 </html>
