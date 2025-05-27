@@ -1,0 +1,114 @@
+  nav {
+  background-color: #4a90e2;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  nav ul li a {
+  line-height: 1;           /* Of bijvoorbeeld 40px als je nav een vaste hoogte heeft */
+  vertical-align: middle;   /* Zorgt dat inline elementen verticaal gecentreerd zijn */
+  display: inline-block;    /* Helpt bij verticale uitlijning */
+}
+
+  nav ul li {
+    display: inline;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+/* Container voor elke optie */
+#quizForm label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+}
+
+/* Radiobutton zelf wat verbergen maar nog wel toegankelijk houden */
+#quizForm input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  position: relative;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+#quizForm input[type="radio"]:checked {
+  border-color: #2ecc71;
+  background-color: #2ecc71;
+}
+
+#quizForm input[type="radio"]::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  top: 4px;
+  left: 4px;
+  border-radius: 50%;
+  background-color: white;
+  display: none;
+}
+
+#quizForm input[type="radio"]:checked::before {
+  display: block;
+}
+
+/* Hover effect op de hele label */
+#quizForm label:hover {
+  background-color: #eef9f1;
+  border-color: #2ecc71;
+}
+#quizForm label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+#result {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+button[type="button"] {
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button[type="button"]:hover {
+  transform: scale(1.03);
+}
+
+button[type="button"]:active {
+  transform: scale(0.97);
+}
